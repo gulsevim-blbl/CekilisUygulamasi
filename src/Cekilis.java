@@ -1,5 +1,6 @@
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +12,11 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -193,6 +199,28 @@ public class Cekilis extends javax.swing.JFrame {
         }
         
     }
+    
+    public void alkısEkle(){
+        
+        try {
+            AudioInputStream stream = AudioSystem.getAudioInputStream(new File("alkış.wav"));
+            
+            Clip clip = AudioSystem.getClip();
+            
+            clip.open(stream);
+            clip.start();
+        
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Cekilis.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Cekilis.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(Cekilis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         if (this.dosyayolu.equals("")) {
@@ -207,6 +235,9 @@ public class Cekilis extends javax.swing.JFrame {
                 model.addElement(kazanan);
                 
             }
+            
+            alkısEkle();
+            
         }
         
         
